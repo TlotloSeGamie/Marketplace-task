@@ -1,0 +1,102 @@
+.main-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container-login {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.container-login h1 {
+    font-size: 1.8rem;
+    color: #000;
+    margin-bottom: 1.5rem;
+}
+
+.logins input {
+    width: 100%;
+    padding: 12px 0;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000000;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.logins input:focus {
+    outline: none;
+    border-bottom-color: #333;
+}
+
+.logins input::placeholder {
+    color: #999;
+}
+
+button {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    font-size: xx-large;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 2rem; 
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.pass {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem; 
+}
+
+.pass a {
+    color: #333;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.pass a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+
+.terms {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 90px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
