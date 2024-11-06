@@ -1,0 +1,60 @@
+.checkout-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+.checkout-container h2, .checkout-container h3 {
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.billing-section, .shipping-section, .payment-section, .order-summary {
+  margin-bottom: 20px;
+}
+
+.billing-section input, .shipping-section input, .payment-section input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.order-summary {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.order-summary .order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.summary-details p, .summary-details h4 {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.place-order-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}

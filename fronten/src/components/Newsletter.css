@@ -1,0 +1,104 @@
+.newsletter {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 1.5rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.newsletter-overlay {
+    background-color: rgba(0, 0, 0, 0.7); 
+    border-radius: 8px;
+}
+
+.newsletter-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #ffde59; 
+}
+
+.newsletter-content p {
+    font-size: 1.1rem;
+    color: #f1f1f1;
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 2rem;
+    color: #f1f1f1;
+}
+
+.newsletter-benefits li {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.newsletter-input {
+    width: 100%;
+    padding: 0.8rem 2.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.newsletter-btn {
+    background-color: #ffde59;
+    color: #111;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 0.5rem;
+}
+
+.newsletter-btn:hover {
+    background-color: #e5c24f;
+    transform: scale(1.05);
+}
+
+.newsletter-message {
+    color: #ffde59;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    .newsletter-form {
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+    }
+    .newsletter-input {
+        max-width: 250px;
+    }
+}

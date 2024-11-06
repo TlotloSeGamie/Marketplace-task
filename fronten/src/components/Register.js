@@ -1,19 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; 
 import './Login.css';
 
+
 const SignUp = () => {
+    const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
+    const [contact, setContact] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+
+    const handleContactChange = (e) => {
+        const value = e.target.value;
+        if (/[^0-9]/.test(value)) {
+            setError("Contact number must contain only digits.");
+        } else {
+            setError("");  
+            setContact(value);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setError(""); // Clear previous errors
+        setError(""); 
 
-        // Simple validation
-        if (!email || !password || !confirmPassword) {
+        if (!userName || !email || !contact || !password || !confirmPassword) {
             setError("All fields are required.");
             return;
         }
@@ -28,8 +43,12 @@ const SignUp = () => {
             return;
         }
 
-        console.log("Email:", email);
-        console.log("Password:", password);
+        const user = { email, password, contact };
+        localStorage.setItem("user", JSON.stringify(user));
+
+        console.log("User registered:", user);
+        
+        navigate("/login");
     };
 
     return (
@@ -38,12 +57,26 @@ const SignUp = () => {
             <div className="container-login">
                 <h1>Sign Up</h1>
                 <form className="logins" onSubmit={handleSubmit}>
+                <input
+                        type="text"
+                        placeholder="Username :"
+                        name="username"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
                     <input
                         type="text"
                         placeholder="Email :"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Contact :"
+                        name="contact"
+                        value={contact}
+                        onChange={handleContactChange}
                     />
                     <input
                         type="password"
@@ -61,8 +94,8 @@ const SignUp = () => {
                     />
                     {error && <div className="error">{error}</div>}
                     <div className="bust">
-                        <button type="submit">Login</button>
-                        <Link to="/Login">Don't have an account? Sign Up</Link> {/* Use Link for routing */}
+                        <button type="submit">Sign Up</button>
+                        <Link to="/login">Already have an account? Login</Link> 
                     </div>
                 </form>
                 <div className="terms">

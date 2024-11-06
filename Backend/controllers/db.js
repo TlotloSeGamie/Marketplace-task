@@ -1,26 +1,37 @@
 const { collection, addDoc, getDocs, deleteDoc, updateDoc, doc } = require("firebase/firestore");
 const { db } = require("../config/firebase");
+const { storage } = require("firebase/storage");
+const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
+const { v4: uuidv4 } = require("uuid"); 
 
 
 const addShoe = async (req, res) => {
     const { brand, name, size, color, price } = req.body;
+    const { image } = req.file; 
 
     try {
-        const docRef = await addDoc(collection(db, "shoe"), {
-            brand: brand,
-            name: name,
-            size: size,
-            color: color,
-            price: price
+        const imageRef = ref(storage, `shoe_images/${uuidv4()}_${image.originalname}`);
+        const uploadResult = await uploadBytes(imageRef, image.buffer);
+        const imageUrl = await getDownloadURL(uploadResult.ref);
+
+        await addDoc(collection(db, "shoe"), {
+            brand,
+            name,
+            size,
+            color,
+            price,
+            imageUrl
         });
 
         res.json({
             message: "Added Successfully",
         });
     } catch (error) {
-        console.log("adding Shoe error", error);
+        console.log("Adding shoe error", error);
+        res.status(500).json({ message: "Error adding shoe", error });
     }
 };
+
 
 const getShoe = async (req, res) => {
     try {
@@ -65,7 +76,6 @@ const updateShoe = async (req, res) => {
         await updateDoc(shoeDocRef, {
             brand,
             name,
-            size,
             size,
             color,
             price

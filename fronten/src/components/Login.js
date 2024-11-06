@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; 
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,8 +23,16 @@ const Login = () => {
             return;
         }
 
-        console.log("Email:", email);
-        console.log("Password:", password);
+        const userData = localStorage.getItem("user");
+
+        const user = userData ? JSON.parse(userData) : null;
+
+        if (user && user.email === email && user.password === password) {
+            console.log("Login successful");
+            navigate("/");
+        } else {
+            setError("Invalid email or password.");
+        }
     };
 
     return (
@@ -47,11 +57,11 @@ const Login = () => {
                     />
                     {error && <div className="error">{error}</div>}
                     <div className="pass">
-                        <Link to="/forgot-password">Forgot Password?</Link> {/* Use Link for routing */}
+                        <Link to="/forgot-password">Forgot Password?</Link>
                     </div>
                     <div className="bust">
                         <button type="submit">Login</button>
-                        <Link to="/signup">Don't have an account? Sign Up</Link> {/* Use Link for routing */}
+                        <Link to="/signup">Don't have an account? Sign Up</Link>
                     </div>
                 </form>
                 <div className="terms">

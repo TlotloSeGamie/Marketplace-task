@@ -1,0 +1,100 @@
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 1rem;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.footer-section p {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin: 0.5rem 0;
+}
+
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    text-decoration: underline;
+    transform: translateX(4px);
+}
+
+.footer-icon, .footer-social-icon {
+    color: #888;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.footer-icon:hover, .footer-social-icon:hover {
+    color: #ccc;
+    transform: scale(1.2);
+}
+
+.social-icons a {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.social-icons a:hover {
+    color: #ccc;
+    transform: scale(1.2);
+}
+
+.footer-section iframe {
+    border: 2px solid #888;
+    border-radius: 5px;
+    transition: border-color 0.4s ease;
+}
+
+.footer-section iframe:hover {
+    border-color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-section {
+        margin: 1rem 0;
+    }
+}
