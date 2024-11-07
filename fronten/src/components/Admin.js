@@ -1,12 +1,45 @@
-import React, { useState } from 'react';
+import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Admin.css';
-import { FaUsers, FaBoxOpen, FaChartLine, FaCog } from 'react-icons/fa';
+import { FaUsers, FaBoxOpen, FaChartLine, FaCog, FaPlus } from 'react-icons/fa';
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('overview'); 
+  const [activeTab, setActiveTab] = useState('overview');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [newProduct, setNewProduct] = useState({
+    brand: '',
+    name: '',
+    size: '',
+    color: '',
+    price: '',
+    image: null,
+  });
+  const navigate = useNavigate();
 
-  const handleTabChange = (tab) => setActiveTab(tab);
+  const brands = [
+    "Nike", "Adidas", "Puma", "Reebok", "New Balance",
+    "ASICS", "Vans", "Converse", "Fila", "Jordan", "Balenciaga"
+  ];
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSelectedCategory(null); // Reset the category selection when changing tabs
+  };
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setNewProduct((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const handleProductSubmit = (e) => {
+    e.preventDefault();
+    console.log('New Product Added:', newProduct);
+    // Call your API or Firebase function here to add the product
+  };
 
   return (
     <div className="admin-dashboard">
@@ -24,6 +57,9 @@ const AdminDashboard = () => {
             </li>
             <li onClick={() => handleTabChange('products')} className={activeTab === 'products' ? 'active' : ''}>
               <FaBoxOpen /> Products
+            </li>
+            <li onClick={() => handleTabChange('addProduct')} className={activeTab === 'addProduct' ? 'active' : ''}>
+              <FaPlus /> Add Product
             </li>
             <li onClick={() => handleTabChange('settings')} className={activeTab === 'settings' ? 'active' : ''}>
               <FaCog /> Settings
@@ -87,31 +123,92 @@ const AdminDashboard = () => {
         {activeTab === 'products' && (
           <div className="products">
             <h2>Product Management</h2>
-            <button className="btn add-product">Add New Product</button>
-            <table className="product-table">
-              <thead>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Nike Air Max</td>
-                  <td>$120</td>
-                  <td>Men's Shoes</td>
-                  <td><button>Edit</button></td>
-                </tr>
-                <tr>
-                  <td>Adidas Ultraboost</td>
-                  <td>$150</td>
-                  <td>Women's Shoes</td>
-                  <td><button>Edit</button></td>
-                </tr>
-              </tbody>
-            </table>
+            {!selectedCategory ? (
+              <div className="categories">
+                <h3>Select a Category</h3>
+                <button onClick={() => setSelectedCategory('Men')}>Men</button>
+                <button onClick={() => setSelectedCategory('Women')}>Women</button>
+                <button onClick={() => setSelectedCategory('Kids')}>Kids</button>
+              </div>
+            ) : (
+              <div className="brands">
+                <h3>{selectedCategory} Brands</h3>
+                <button onClick={() => setSelectedCategory(null)} className="back-button">Back to Categories</button>
+                <table className="brand-table">
+                  <thead>
+                    <tr>
+                      <th>Brand Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {brands.map((brand, index) => (
+                      <tr key={index}>
+                        <td>
+                          <button className="brand-button">{brand}</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'addProduct' && (
+          <div className="add-product">
+            <h2>Add New Product</h2>
+            <form onSubmit={handleProductSubmit}>
+              <input
+                type="text"
+                name="brand"
+                placeholder="Brand"
+                value={newProduct.brand}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="name"
+                placeholder="Product Name"
+                value={newProduct.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="size"
+                placeholder="Size"
+                value={newProduct.size}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="color"
+                placeholder="Color"
+                value={newProduct.color}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="number"
+                name="price"
+                placeholder="Price"
+                value={newProduct.price}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="file"
+                name="image"
+                onChange={handleChange}
+                required
+              />
+              <button type="submit" className="btn add-product-btn">
+                Add Product
+              </button>
+            </form>
           </div>
         )}
 

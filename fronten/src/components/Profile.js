@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
-import { FaUserCircle, FaEdit, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaUserCircle, FaEdit, FaEnvelope, FaPhone, FaMapMarkerAlt, FaShoppingCart } from 'react-icons/fa';
 
 const Profile = () => {
+  const [isCartVisible, setIsCartVisible] = useState(false);
+
   const user = {
     recentActivity: [
       { activity: "Viewed Product: Nike Air Max", date: "2024-10-20" },
       { activity: "Updated Address", date: "2024-10-18" },
       { activity: "Placed Order #12345", date: "2024-10-15" },
     ],
+    cart: [
+      { product: "Nike Air Max", quantity: 2 },
+      { product: "Adidas UltraBoost", quantity: 1 },
+      { product: "Puma RS-X", quantity: 1 },
+    ],
+  };
+
+  const toggleCartVisibility = () => {
+    setIsCartVisible(!isCartVisible);
   };
 
   return (
@@ -59,6 +70,29 @@ const Profile = () => {
             ))}
           </ul>
         </div>
+
+        <h3>
+          <button className="cart-btn" onClick={toggleCartVisibility}>
+            <FaShoppingCart className="cart-icon" /> My Cart
+          </button>
+        </h3>
+
+        {isCartVisible && (
+          <div className="cart-items">
+            <h4>Cart Items</h4>
+            {user.cart.length === 0 ? (
+              <p>Your cart is empty.</p>
+            ) : (
+              <ul>
+                {user.cart.map((item, index) => (
+                  <li key={index}>
+                    <span>{item.product}</span> - <span>Quantity: {item.quantity}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

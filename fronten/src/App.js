@@ -20,9 +20,8 @@ import Checkout from './components/CheckouPage';
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        {/* <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} /> 
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -33,10 +32,9 @@ function App() {
         <Route path="/shipping" element={<ShippingInformation />} />
         <Route path='/newsletter' element={<Newsletter />} />
         <Route path='/about-us' element={<AboutUs />} />
-        <Route path='/admin' element={<AdminDashboard/>} /> */}
-        <Route path='/' element={<Checkout/>} />
+        <Route path='/admin' element={<AdminDashboard/>} />
+        {/* <Route path='/' element={<Checkout/>} /> */}
       </Routes>
-       <Footer /> 
     </Router>
   );
 }
