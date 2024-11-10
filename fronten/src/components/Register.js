@@ -1,55 +1,60 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom"; 
+import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerStart, registerSuccess, registerFailure } from '../redux/userSlice';
+import { registerUser } from '../redux/userSlice';  
 import './Login.css';
 
-
 const SignUp = () => {
-    const [userName, setUserName] = useState("");
-    const [email, setEmail] = useState("");
-    const [contact, setContact] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [contact, setContact] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false); 
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); 
+    const [error, setError] = useState('');
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
 
     const handleContactChange = (e) => {
         const value = e.target.value;
         if (/[^0-9]/.test(value)) {
-            setError("Contact number must contain only digits.");
+            setError('Contact number must contain only digits.');
         } else {
-            setError("");  
+            setError('');
             setContact(value);
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(""); 
-
+    
         if (!userName || !email || !contact || !password || !confirmPassword) {
-            setError("All fields are required.");
+            setError('All fields are required.');
             return;
         }
-
         if (!/\S+@\S+\.\S+/.test(email)) {
-            setError("Please enter a valid email address.");
+            setError('Please enter a valid email address.');
             return;
         }
-
         if (password !== confirmPassword) {
-            setError("Passwords do not match.");
+            setError('Passwords do not match.');
             return;
         }
+    
+        dispatch(registerStart());  
 
-        const user = { email, password, contact };
-        localStorage.setItem("user", JSON.stringify(user));
+    try {
+        await dispatch(registerUser(email, password, userName, contact));
 
-        console.log("User registered:", user);
-        
-        navigate("/login");
+        navigate('/login');  
+    } catch (error) {
+        dispatch(registerFailure(error.message)); 
+    }
     };
+    
 
     return (
         <div className="main-login">
@@ -57,41 +62,54 @@ const SignUp = () => {
             <div className="container-login">
                 <h1>Sign Up</h1>
                 <form className="logins" onSubmit={handleSubmit}>
-                <input
+                    <input
                         type="text"
                         placeholder="Username :"
-                        name="username"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
                     />
                     <input
                         type="text"
                         placeholder="Email :"
-                        name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                         type="text"
                         placeholder="Contact :"
-                        name="contact"
                         value={contact}
                         onChange={handleContactChange}
                     />
-                    <input
-                        type="password"
-                        placeholder="Password :"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm Password :"
-                        name="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
+                    <div className="password-field">
+                        <input
+                            type={passwordVisible ? 'text' : 'password'} // Toggle between password and text type
+                            placeholder="Password :"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button 
+                            type="button" 
+                            onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility on click
+                            className="eye-icon"
+                        >
+                            {passwordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
+                        </button>
+                    </div>
+                    <div className="password-field">
+                        <input
+                            type={confirmPasswordVisible ? 'text' : 'password'} // Toggle between password and text type
+                            placeholder="Confirm Password :"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <button 
+                            type="button" 
+                            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)} // Toggle visibility on click
+                            className="eye-icon"
+                        >
+                            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
+                        </button>
+                    </div>
                     {error && <div className="error">{error}</div>}
                     <div className="bust">
                         <button type="submit">Sign Up</button>
@@ -104,6 +122,6 @@ const SignUp = () => {
             </div>
         </div>
     );
-}
+};
 
 export default SignUp;

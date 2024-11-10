@@ -60,6 +60,7 @@
 .categories h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    border-bottom: none;
 }
 
 .category-list {
@@ -377,8 +378,21 @@ strong {
     outline: none;
     transition: border-color 0.3s ease;
 }
+.size-input {
+    width: 60px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
 
 .quantity-input:focus {
+    border-color: #007BFF;
+}
+.size-input:focus {
     border-color: #007BFF;
 }
 

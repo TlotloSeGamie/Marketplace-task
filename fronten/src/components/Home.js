@@ -17,6 +17,7 @@ const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const [size, setSize] = useState(1);
     const products = [
         {
             id: 1,
@@ -78,10 +79,14 @@ const Home = () => {
         setIsModalOpen(false);
         setSelectedProduct(null);
         setQuantity(1); 
+        setSize(1); 
     };
 
     const handleQuantityChange = (e) => {
         setQuantity(e.target.value);
+    };
+    const handleSizeChange = (e) => {
+        setSize(e.target.value);
     };
 
 
@@ -148,16 +153,21 @@ const Home = () => {
                                     onChange={handleQuantityChange}
                                     className="quantity-input"
                                 />
+                                <label>Size:</label>
+                                <input
+                                    type="number"
+                                    value={size}
+                                    min="1"
+                                    onChange={handleSizeChange}
+                                    className="size-input"
+                                />
                             </div>
                             <div className="product-icons">
                                 <button className="icon-btn">
-                                    <FaHeart /> Add to Favorites
-                                </button>
-                                <button className="icon-btn">
                                     <FaShoppingCart /> Add to Cart
                                 </button>
+                                <button className="purchase-btn">Purchase Now</button>
                             </div>
-                            <button className="purchase-btn">Purchase Now</button>
                         </div>
                     </div>
                 )}

@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch, FaMapMarkerAlt, FaUser } from 'react-icons/fa';
+import { onAuthStateChanged, signOut } from 'firebase/auth'; 
+import { auth } from '../config/firebase'; 
 import './Navbar.css';
 import Profile from './Profile';
 
 const Navbar = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false); 
-    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false); 
 
     useEffect(() => {
-        const userData = localStorage.getItem("user");
-        if (userData) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
-    }, []); 
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(!!user); 
+        });
+
+        return unsubscribe;
+    }, []);
 
     const handleUserIconClick = () => {
         setIsProfileModalOpen(true); 
@@ -24,9 +25,9 @@ const Navbar = () => {
         setIsProfileModalOpen(false); 
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        setIsAuthenticated(false);
+    const handleLogout = async () => {
+        await signOut(auth);
+        setIsAuthenticated(false); 
     };
 
     return (

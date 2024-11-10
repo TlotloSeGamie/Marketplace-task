@@ -1,37 +1,38 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; 
+import { useDispatch } from 'react-redux'; 
+import { loginStart, loginSuccess, loginFailure } from '../redux/authSlice'; // Import actions
+import { loginUser } from "../redux/userSlice";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(false); 
     const [error, setError] = useState("");
+    const dispatch = useDispatch(); 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(""); 
-
+        setError("");
+    
         if (!email || !password) {
             setError("Both fields are required.");
             return;
         }
-
-        if (!/\S+@\S+\.\S+/.test(email)) {
-            setError("Please enter a valid email address.");
-            return;
-        }
-
-        const userData = localStorage.getItem("user");
-
-        const user = userData ? JSON.parse(userData) : null;
-
-        if (user && user.email === email && user.password === password) {
-            console.log("Login successful");
+    
+        dispatch(loginStart());
+    
+        try {
+            const userData = await loginUser(email, password); // Get user data from login function
+            dispatch(loginSuccess(userData)); // Dispatch success action with user data
             navigate("/");
-        } else {
-            setError("Invalid email or password.");
+        } catch (error) {
+            dispatch(loginFailure(error.message));
+            setError(error.message);
         }
     };
 
@@ -48,13 +49,21 @@ const Login = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <input
-                        type="password"
-                        placeholder="Password :"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <div className="password-field">
+                        <input
+                            type={passwordVisible ? 'text' : 'password'} // Toggle between password and text type
+                            placeholder="Password :"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button 
+                            type="button" 
+                            onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility on click
+                            className="eye-icon"
+                        >
+                            {passwordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
+                        </button>
+                    </div>
                     {error && <div className="error">{error}</div>}
                     <div className="pass">
                         <Link to="/forgot-password">Forgot Password?</Link>
