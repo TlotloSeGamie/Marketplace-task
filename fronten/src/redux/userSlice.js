@@ -68,11 +68,11 @@ export const loginUser = (email, password) => async (dispatch) => {
 
         if (docSnap.exists()) {
             const userData = { userId, ...docSnap.data() };
-            dispatch(loginSuccess(userData)); // Dispatching the loginSuccess action
+            dispatch(loginSuccess(userData)); 
         } else {
             throw new Error("User profile not found in Firestore.");
         }
     } catch (error) {
-        dispatch(loginFailure(error.message)); // Handling failure
+        dispatch(loginFailure(error.message)); 
     }
 };
