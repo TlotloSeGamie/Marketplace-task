@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setSelectedCategory(null); // Reset the category selection when changing tabs
+    setSelectedCategory(null); 
   };
 
   const handleChange = (e) => {
@@ -38,7 +38,6 @@ const AdminDashboard = () => {
   const handleProductSubmit = (e) => {
     e.preventDefault();
     console.log('New Product Added:', newProduct);
-    // Call your API or Firebase function here to add the product
   };
 
   return (

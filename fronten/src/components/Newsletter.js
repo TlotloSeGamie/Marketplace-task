@@ -24,7 +24,7 @@ const Newsletter = () => {
             <section className="newsletter">
                 <div className="newsletter-overlay">
                     <div className="newsletter-content">
-                        <h2>Join the BigSteppa Community</h2>
+                        <h2>Join the SunThread Market Community</h2>
                         <p>Be part of the 5,000+ customers who get exclusive deals and insider updates every month.</p>
             
                         <ul className="newsletter-benefits">

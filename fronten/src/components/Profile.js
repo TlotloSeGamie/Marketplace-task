@@ -5,6 +5,8 @@ import { FaUserCircle, FaEdit, FaEnvelope, FaPhone, FaMapMarkerAlt, FaShoppingCa
 
 const Profile = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
+
+  // const
   
   const user = useSelector((state) => state.user.user);
 

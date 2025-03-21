@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-section">
-        <h2 className="footer-logo">BigSteppa</h2>
-        <p>Discover the latest in footwear fashion and technology. We offer quality shoes for men, women, and kids.</p>
-      </div>
+        <h2 className="footer-logo">SunThread Market</h2>
+        <p>Step into style with SunThread Market—where fashion meets comfort. Explore our curated collection of premium footwear for men, women, and kids.</p>
+        </div>
 
       <div className="footer-section">
         <h3>Contact Us</h3>

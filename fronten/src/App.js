@@ -16,10 +16,12 @@ import Newsletter from './components/Newsletter';
 import Profile from './components/Profile';
 import AdminDashboard from './components/Admin';
 import Checkout from './components/CheckouPage';
+import ProductList from './components/ProductList';
 
 function App() {
   return (
     <Router>
+            {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -33,7 +35,9 @@ function App() {
         <Route path='/newsletter' element={<Newsletter />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/admin' element={<AdminDashboard/>} />
-        {/* <Route path='/' element={<Checkout/>} /> */}
+        <Route path='/profile' element={<Profile/>} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/product-list' element={<ProductList />} />
       </Routes>
     </Router>
   );

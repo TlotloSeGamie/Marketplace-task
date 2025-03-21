@@ -8,6 +8,8 @@ import Profile from './Profile';
 const Navbar = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false); 
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false); 
+    const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+    const [visible, setVisible] = useState(true);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -16,6 +18,17 @@ const Navbar = () => {
 
         return unsubscribe;
     }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollPos = window.scrollY;
+            setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 50);
+            setPrevScrollPos(currentScrollPos);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [prevScrollPos]);
 
     const handleUserIconClick = () => {
         setIsProfileModalOpen(true); 
@@ -27,19 +40,19 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         await signOut(auth);
-        setIsAuthenticated(false); 
+        setIsAuthenticated(false);
     };
 
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${visible ? "" : "hidden"}`}>
             <div className="navbar-logo">
-                <h1>BigSteppa</h1>
+                <h1>SunThread Market</h1>
             </div>
             
             <div className="navbar-links">
                 <a href='/'>HOME</a>
                 <a href="/new-release">NEW RELEASE</a>
-                <div className="brands-container">
+                {/* <div className="brands-container">
                     <a href="/brands">BRANDS</a>
                     <div className="brands-dropdown">
                         <a href="/brands/nike">Nike</a>
@@ -54,7 +67,7 @@ const Navbar = () => {
                         <a href="/brands/jordan">Jordan</a>
                         <a href="/brands/balenciaga">Balenciaga</a>
                     </div>
-                </div>
+                </div> */}
                 <a href="/men">MEN</a>
                 <a href="/women">WOMEN</a>
                 <a href="/kids">KIDS</a>
