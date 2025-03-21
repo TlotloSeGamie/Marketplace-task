@@ -9,7 +9,7 @@ const ReturnsAndExchanges = () => {
             <Navbar />
             <div className="legal-page">
                 <h1>Returns & Exchanges</h1>
-                <p>If you're unsatisfied with your purchase, BigSteppa offers a 30-day return policy. Items must be in their original condition with tags attached.</p>
+                <p>If you're unsatisfied with your purchase, SunThread Market offers a 30-day return policy. Items must be in their original condition with tags attached.</p>
             
                 <h2>How to Initiate a Return</h2>
                 <p>Contact our support team to start a return. We'll provide instructions and a prepaid label for sending your item back.</p>

@@ -6,6 +6,8 @@ import { loginStart, loginSuccess, loginFailure } from '../redux/authSlice'; // 
 import { loginUser } from "../redux/userSlice";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
+import heroImage from '../Images/heroimg1.jpg'
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -38,43 +40,44 @@ const Login = () => {
 
     return (
         <div className="main-login">
-            <h3>Logo</h3>
-            <div className="container-login">
-                <h1>Sign In</h1>
-                <form className="logins" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Email :"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <div className="password-field">
+            <div className="login-main-container">
+                <div className="container-login">
+                    <h1>Sign In</h1>
+                    <form className="logins" onSubmit={handleSubmit}>
                         <input
-                            type={passwordVisible ? 'text' : 'password'} // Toggle between password and text type
-                            placeholder="Password :"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            type="text"
+                            placeholder="Email :"
+                            name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
-                        <button 
-                            type="button" 
-                            onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility on click
-                            className="eye-icon"
-                        >
-                            {passwordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
-                        </button>
+                        <div className="password-field">
+                            <input
+                                type={passwordVisible ? 'text' : 'password'} // Toggle between password and text type
+                                placeholder="Password :"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility on click
+                                className="eye-icon"
+                            >
+                                {passwordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
+                            </button>
+                        </div>
+                        {error && <div className="error">{error}</div>}
+                        <div className="pass">
+                            <Link to="/forgot-password">Forgot Password?</Link>
+                        </div>
+                        <div className="bust">
+                            <button type="submit">Login</button>
+                            <h4>Don't have an account?<Link to="/signup"> Sign Up</Link></h4>
+                        </div>
+                    </form>
+                    <div className="terms">
+                        <h5>By continuing, you agree to our Terms of Use and Privacy Policy</h5>
                     </div>
-                    {error && <div className="error">{error}</div>}
-                    <div className="pass">
-                        <Link to="/forgot-password">Forgot Password?</Link>
-                    </div>
-                    <div className="bust">
-                        <button type="submit">Login</button>
-                        <Link to="/signup">Don't have an account? Sign Up</Link>
-                    </div>
-                </form>
-                <div className="terms">
-                    <h5>By continuing, you agree to our Terms of Use and Privacy Policy</h5>
                 </div>
             </div>
         </div>

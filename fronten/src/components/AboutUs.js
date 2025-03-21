@@ -13,13 +13,13 @@ const AboutUs = () => {
             <Navbar />
             <div className="about-us">
                 <section className="about-hero">
-                    <h1>About BigSteppa</h1>
+                    <h1>About SunThread Market</h1>
                     <p>Your trusted destination for the best footwear brands and styles.</p>
                 </section>
                 <section className="mission">
                     <h2>Our Mission</h2>
                     <p>
-                        At BigSteppa, our mission is to bring top-quality, stylish, and comfortable shoes to everyone, regardless of age or style preference.
+                        At SunThread Market, our mission is to bring top-quality, stylish, and comfortable shoes to everyone, regardless of age or style preference.
                         We believe that every step matters, and we’re here to ensure that each one you take is a step in style and comfort.
                     </p>
                 </section>
@@ -29,11 +29,11 @@ const AboutUs = () => {
                         <img src={storeImage} alt="Our store" className="story-image" />
                         <div className="story-text">
                             <p>
-                                Founded with a passion for fashion and footwear, BigSteppa has grown from a small, local shop to a nationwide destination for high-quality shoes.
+                                Founded with a passion for fashion and footwear, SunThread Market has grown from a small, local shop to a nationwide destination for high-quality shoes.
                                 We pride ourselves on our carefully curated selection of brands, ensuring that our customers always find the latest trends and timeless classics.
                             </p>
                             <p>
-                                Over the years, we have expanded our range, partnering with top brands to bring an unbeatable variety to our customers. From athletic to formal wear, BigSteppa is committed to helping you find the perfect fit.
+                                Over the years, we have expanded our range, partnering with top brands to bring an unbeatable variety to our customers. From athletic to formal wear, SunThread Market is committed to helping you find the perfect fit.
                             </p>
                         </div>
                     </div>
@@ -50,20 +50,20 @@ const AboutUs = () => {
                 <section className="community-involvement">
                     <h2>Community Involvement</h2>
                     <p>
-                        At BigSteppa, we believe in giving back. We actively participate in community events and support local charities.
+                        At SunThread Market, we believe in giving back. We actively participate in community events and support local charities.
                         Our aim is to create a positive impact in our community and inspire others to do the same.
                     </p>
                 </section>
                 <section className="customer-testimonials">
                     <h2>What Our Customers Say</h2>
                     <blockquote className="testimonial">
-                        <p>"BigSteppa has transformed my shoe shopping experience! The quality and service are unmatched." - Sarah K.</p>
+                        <p>"SunThread Market has transformed my shoe shopping experience! The quality and service are unmatched." - Sarah K.</p>
                     </blockquote>
                     <blockquote className="testimonial">
-                        <p>"I love the variety of brands and styles available at BigSteppa. I always find what I’m looking for!" - John D.</p>
+                        <p>"I love the variety of brands and styles available at SunThread Market. I always find what I’m looking for!" - John D.</p>
                     </blockquote>
                     <blockquote className="testimonial">
-                        <p>"Fast shipping and excellent customer service. BigSteppa is my go-to for shoes!" - Emily R.</p>
+                        <p>"Fast shipping and excellent customer service. SunThread Market is my go-to for shoes!" - Emily R.</p>
                     </blockquote>
                 </section>
                 <section className="customer-commitment">
@@ -75,7 +75,7 @@ const AboutUs = () => {
                         <li>🆕 Constantly updated stock with the latest styles.</li>
                     </ul>
                     <p>
-                        At BigSteppa, you’re not just a customer; you’re part of our community. We’re here to ensure that every step you take with us is comfortable, stylish, and fulfilling.
+                        At SunThread Market, you’re not just a customer; you’re part of our community. We’re here to ensure that every step you take with us is comfortable, stylish, and fulfilling.
                     </p>
                 </section>
                 <section className="call-to-action">

@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa'; 
 import './Home.css';
-import heroImage from '../Images/heroimg1.jpg'
-import menCategoryImage from '../Images/men.jpg';
-import womenCategoryImage from '../Images/women.jpg';
-import kidsCategoryImage from '../Images/kids.jpg';
-import popular1 from '../Images/AIR+MAX+DN.png';
-import popular2 from '../Images/NIKE+AIR+MAX+PLUS.png';
-import popular3 from '../Images/AIR+MAX+PLUS+III.png';
+import heroImage from "../assets/HeroImg1.webp";
+import heroImage1 from "../assets/HeroImg2.webp";
+import heroImage2 from "../assets/HeroImg3.webp"
+import original from '../assets/original-shorts.jpg';
+import swim from "../assets/textured Swim.avif";
+import polo from "../assets/range polos.jpg";
+import training from "../assets/training shorts.webp";
+import popular1 from '../assets/summer boys.webp';
+import popular2 from '../assets/summer drip men.jpg';
+import popular3 from '../assets/summer girls.jpg';
+import popular4 from '../assets/summer jean.webp';
+import popular5 from '../assets/summer kids 2.webp';
+import popular6 from '../assets/summer men 1.webp';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
@@ -21,54 +27,66 @@ const Home = () => {
     const products = [
         {
             id: 1,
-            name: 'Nike Air Max 270',
+            name: '',
             price: '2000',
             image: popular1,
-            description: 'A comfortable and stylish Nike Air Max sneaker with advanced cushioning and support.',
+            description: '',
         },
         {
             id: 2,
-            name: 'Nike Air Force 1',
+            name: '',
             price: '1800',
             image: popular2,
-            description: 'The iconic Nike Air Force 1, offering timeless style and durable design for everyday wear.',
+            description: '',
         },
         {
             id: 3,
-            name: 'Nike Zoom Freak 4',
+            name: '',
             price: '2500',
             image: popular3,
-            description: 'The Nike Zoom Freak 4 is designed for speed, comfort, and style, perfect for basketball players.',
+            description: '',
         },
         {
             id: 1,
-            name: 'Nike Air Max 270',
+            name: '',
             price: '2000',
-            image: popular1,
-            description: 'A comfortable and stylish Nike Air Max sneaker with advanced cushioning and support.',
+            image: popular4,
+            description: '',
         },
         {
             id: 2,
-            name: 'Nike Air Force 1',
+            name: '',
             price: '1800',
-            image: popular2,
-            description: 'The iconic Nike Air Force 1, offering timeless style and durable design for everyday wear.',
+            image: popular5,
+            description: '',
         },
         {
             id: 3,
-            name: 'Nike Zoom Freak 4',
+            name: '',
             price: '2500',
-            image: popular3,
-            description: 'The Nike Zoom Freak 4 is designed for speed, comfort, and style, perfect for basketball players.',
+            image: popular6,
+            description: '',
         },
         {
             id: 1,
-            name: 'Nike Air Max 270',
+            name: '',
             price: '2000',
             image: popular1,
-            description: 'A comfortable and stylish Nike Air Max sneaker with advanced cushioning and support.',
+            description: '',
         },
     ];
+
+    const heroImages = [heroImage, heroImage1, heroImage2];
+
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % heroImages.length);
+        }, 5000); 
+
+        return () => clearInterval(interval); 
+    }, []);
 
     const handleViewDetails = (product) => {
         setSelectedProduct(product);
@@ -92,32 +110,41 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar />
             <div className="main-home">
+                <Navbar />
                 <section
-                    className="hero"
-                    style={ {height: '30vh', bottom: '3rem' , backgroundImage: `url(${heroImage})` }}
-                >
-                    <div className="hero-content">
-                        <h1>Step into Style with BigSteppa</h1>
-                        <p>Explore the latest trends and timeless designs for men, women, and kids.</p>
-                        <button className="shop-now-btn">Shop Now</button>
-                    </div>
-                </section>
+            className="hero"
+            style={{
+                height: "60vh",
+                bottom: "3rem",
+                backgroundImage: `url(${heroImages[currentSlide]})`,
+                transition: "background-image 1s ease-in-out",
+            }}
+        >
+            <div className="hero-content">
+                <h1>Step into Style with SunThread Market</h1>
+                <p>Explore the latest trends and timeless designs for men, women, and kids.</p>
+                <button className="shop-now-btn">Shop Now</button>
+            </div>
+        </section>
                 <div className="categories">
-                    <h2>Shop by Category</h2>
+                    <h2>Trending</h2>
                     <div className="category-list">
                         <div className="category-item">
-                            <img src={menCategoryImage} alt="Shoes for men" />
-                            <h3>Men</h3>
+                            <img src={original} alt="Original Short" />
+                            <h3>Original shorts</h3>
                         </div>
                         <div className="category-item">
-                            <img src={womenCategoryImage} alt="Shoes for women" />
-                            <h3>Women</h3>
+                            <img src={training} alt="Training shorts" />
+                            <h3>Training Shorts</h3>
                         </div>
                         <div className="category-item">
-                            <img src={kidsCategoryImage} alt="Shoes for kids" />
-                            <h3>Kids</h3>
+                            <img src={swim} alt="Swim Shorts" />
+                            <h3>Swim Shorts</h3>
+                        </div>
+                        <div className="category-item">
+                            <img src={polo} alt="Range Polos" />
+                            <h3>Range Polo</h3>
                         </div>
                     </div>
                 </div>
@@ -171,8 +198,8 @@ const Home = () => {
                         </div>
                     </div>
                 )}
-                <section className="call-to-action">
-                    <h2>Be a Step Ahead</h2>
+                <section className="call-to-action-news">
+                    <h2>Step into style with SunThread Market</h2>
                     <p>Sign up for our newsletter to get exclusive deals and the latest updates.</p>
                     <button
                         className="cta-btn"

@@ -46,78 +46,77 @@ const SignUp = () => {
     
         dispatch(registerStart());  
 
-    try {
-        await dispatch(registerUser(email, password, userName, contact));
-
-        navigate('/login');  
-    } catch (error) {
-        dispatch(registerFailure(error.message)); 
-    }
+        try {
+            await dispatch(registerUser(email, password, userName, contact));
+            navigate('/login');  
+        } catch (error) {
+            dispatch(registerFailure(error.message)); 
+        }
     };
-    
 
     return (
         <div className="main-login">
-            <h3>Logo</h3>
-            <div className="container-login">
-                <h1>Sign Up</h1>
-                <form className="logins" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Username :"
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Email :"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Contact :"
-                        value={contact}
-                        onChange={handleContactChange}
-                    />
-                    <div className="password-field">
+            <div className="login-main-container">
+                <div className="container-login">
+                    <h1>Sign Up</h1>
+                    <form className="logins" onSubmit={handleSubmit}>
                         <input
-                            type={passwordVisible ? 'text' : 'password'} // Toggle between password and text type
-                            placeholder="Password :"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            type="text"
+                            placeholder="Username :"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
                         />
-                        <button 
-                            type="button" 
-                            onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility on click
-                            className="eye-icon"
-                        >
-                            {passwordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
-                        </button>
-                    </div>
-                    <div className="password-field">
                         <input
-                            type={confirmPasswordVisible ? 'text' : 'password'} // Toggle between password and text type
-                            placeholder="Confirm Password :"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            type="text"
+                            placeholder="Email :"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
-                        <button 
-                            type="button" 
-                            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)} // Toggle visibility on click
-                            className="eye-icon"
-                        >
-                            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
-                        </button>
+                        <input
+                            type="text"
+                            placeholder="Contact :"
+                            value={contact}
+                            onChange={handleContactChange}
+                        />
+                        <div className="password-field">
+                            <input
+                                type={passwordVisible ? 'text' : 'password'}
+                                placeholder="Password :"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button 
+                                type="button" 
+                                onClick={() => setPasswordVisible(!passwordVisible)}
+                                className="eye-icon"
+                            >
+                                {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
+                        <div className="password-field">
+                            <input
+                                type={confirmPasswordVisible ? 'text' : 'password'}
+                                placeholder="Confirm Password :"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            <button 
+                                type="button" 
+                                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                                className="eye-icon"
+                            >
+                                {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
+                        {error && <div className="error">{error}</div>}
+                        <div className="bust">
+                            <button type="submit">Sign Up</button>
+                            <h4>Already have an account?<Link to="/login"> Login</Link> </h4>
+                        </div>
+                    </form>
+                    <div className="terms">
+                        <h5>By continuing, you agree to our Terms of Use and Privacy Policy</h5>
                     </div>
-                    {error && <div className="error">{error}</div>}
-                    <div className="bust">
-                        <button type="submit">Sign Up</button>
-                        <Link to="/login">Already have an account? Login</Link> 
-                    </div>
-                </form>
-                <div className="terms">
-                    <h5>By continuing, you agree to our Terms of Use and Privacy Policy</h5>
                 </div>
             </div>
         </div>
